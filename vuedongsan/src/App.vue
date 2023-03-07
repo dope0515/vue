@@ -8,6 +8,7 @@
   <div v-for="(a,i) in products" :key="a">
     <h4>{{ products[i] }} 원룸</h4>
     <p>{{ price[i] }} 만원</p>
+    <button @click="this.신고수 += 1">허위매물신고</button> <span>신고수 : {{ 신고수 }}</span>
   </div>
 </template>
 
@@ -18,6 +19,7 @@ export default {
   name: 'App',
   data(){
     return {
+      신고수 : 0,
       price : [60,100, 130],
       products: ['역삼동원룸','천호동원룸','마포구원룸'],
       menus : ['Home','Procuts','About'],
