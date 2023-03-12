@@ -1,4 +1,14 @@
 <template>
+
+  <!--모달-->
+  <div class="black-bg" v-if=" 모달창상태 == false">
+    <div class="white-bg">
+      <h4>상세페이지</h4>
+      <p>상세페이지 내용</p>
+    </div>
+  </div>
+  <!--/모달-->
+
   <!--메뉴-->
   <div class="menu">
     <a href="javascript:void(0)" v-for="(menuList,i) in menus" :key="i">{{ menuList }}</a>
@@ -6,9 +16,10 @@
   <!--//메뉴-->
   <!--원룸 가격 리스트-->
   <div v-for="(a,i) in products" :key="a">
-    <h4>{{ products[i] }} 원룸</h4>
+    <img src="./assets/room0.jpg" class="room-img">
+    <h4 @click="모달창상태 = true">{{ products[i] }} 원룸</h4>
     <p>{{ price[i] }} 만원</p>
-    <button @click="this.신고수 += 1">허위매물신고</button> <span>신고수 : {{ 신고수 }}</span>
+    <button @click="increase">허위매물신고</button> <span>신고수 : {{ 신고수[i] }}</span>
   </div>
 </template>
 
@@ -19,19 +30,31 @@ export default {
   name: 'App',
   data(){
     return {
-      신고수 : 0,
+      모달창상태 : true,
+      신고수 : [0,0,0],
       price : [60,100, 130],
       products: ['역삼동원룸','천호동원룸','마포구원룸'],
       menus : ['Home','Procuts','About'],
     }
   },
-  components: {
-
-  }
+  methods: {
+    increase() {
+      this.신고수 += 1;
+    }
+  },
 }
 </script>
 
 <style>
+
+body {margin:0;}
+
+div {box-sizing: border-box;}
+
+.black-bg {width:100%; height:100%; background: rgba(0,0,0,0.5); position:fixed; padding:20px;}
+
+.white-bg {width:100%; background:#FFFFFF; border-radius:8px; padding:20px;}
+
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -49,4 +72,6 @@ export default {
   color: #FFFFFF;
   padding: 10px;
 }
+.room-img {width:100%; margin-top: 40px;}
+
 </style>
