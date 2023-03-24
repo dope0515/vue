@@ -5,6 +5,7 @@
     <div class="white-bg">
       <h4>상세페이지</h4>
       <p>상세페이지 내용</p>
+      <button type="button" @click=" 모달창상태 = true">닫기</button>
     </div>
   </div>
   <!--/모달-->
@@ -16,10 +17,10 @@
   <!--//메뉴-->
   <!--원룸 가격 리스트-->
   <div v-for="(a,i) in products" :key="a">
-    <img src="./assets/room0.jpg" class="room-img">
-    <h4 @click="모달창상태 = true">{{ products[i] }} 원룸</h4>
+    <img :src="require('./assets/room' + i + '.jpg')"  class="room-img">
+    <h4 @click=" 모달창상태 = false ">{{ products[i] }} 원룸</h4>
     <p>{{ price[i] }} 만원</p>
-    <button @click="increase">허위매물신고</button> <span>신고수 : {{ 신고수[i] }}</span>
+    <button @click="increase(i)">허위매물신고</button> <span>신고수 : {{ 신고수[i] }}</span>
   </div>
 </template>
 
@@ -38,8 +39,8 @@ export default {
     }
   },
   methods: {
-    increase() {
-      this.신고수 += 1;
+    increase(e) {
+      this.신고수[e] += 1;
     }
   },
 }
